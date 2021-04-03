@@ -17,11 +17,11 @@ dependencies {
     implementation(Libs.kotlinJdk8)
     runtimeOnly(Libs.jaxb)
 
-    implementation(Libs.swagger)
-    implementation(Libs.swaggerUi)
     implementation(Libs.jacksonKotlin)
 
     implementation(Libs.springWeb)
+    implementation(Libs.springMqtt)
+    implementation(Libs.springWebSocket)
 
     testImplementation(Libs.springTest) {
         exclude("org.junit.vintage", "junit-vintage-engine")

@@ -1,0 +1,8 @@
+mqtt:
+  url: "tcp://d427e1f50e8041e4af18d3125fd0dc91.s1.eu.hivemq.cloud:8883"
+  username: phoenigm
+  password: Qwerty123
+websocket:
+  endpoint: /air-humidity
+server:
+  port: ${PORT:20000}

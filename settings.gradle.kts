@@ -1,3 +1,3 @@
-rootProject.name = "spring-boot-kotlin-gradle-template"
+rootProject.name = "iot"
 
-include("template-app")
+include("sensor-reader")

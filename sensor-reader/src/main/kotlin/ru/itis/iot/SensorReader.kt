@@ -1,11 +1,11 @@
-package com.example.demo
+package ru.itis.iot
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class DemoApplication
+open class SensorReader
 
 fun main(args: Array<String>) {
-    runApplication<DemoApplication>(*args)
+    runApplication<SensorReader>(*args)
 }
