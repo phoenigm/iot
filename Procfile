@@ -1,0 +1,1 @@
+web: java -Xmx128m -jar sensor-reader/build/libs/sensor-reader.jar
