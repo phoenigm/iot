@@ -2,7 +2,10 @@ mqtt:
   url: "tcp://d427e1f50e8041e4af18d3125fd0dc91.s1.eu.hivemq.cloud:8883"
   username: phoenigm
   password: Qwerty123
+  topic: test/topic
+  clientId: sensor-reader
 websocket:
-  endpoint: /air-humidity
+  endpoint: /carbon-dioxide
 server:
   port: ${PORT:20000}
+#  con -h  d427e1f50e8041e4af18d3125fd0dc91.s1.eu.hivemq.cloud -p 8883 -s -u phoenigm -pw Qwerty123

@@ -1,2 +1,4 @@
-package ru.itis.iot;public class CarboxDioxideData {
+package ru.itis.iot;
+
+public class CarboxDioxideData {
 }

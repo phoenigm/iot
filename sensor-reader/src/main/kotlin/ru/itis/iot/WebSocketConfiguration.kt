@@ -15,11 +15,11 @@ open class WebSocketConfig : WebSocketMessageBrokerConfigurer {
     private lateinit var endpoint: String
 
     override fun configureMessageBroker(config: MessageBrokerRegistry) {
-        config.enableSimpleBroker("/topic/")
+        config.enableSimpleBroker("/")
         config.setApplicationDestinationPrefixes("/app")
     }
 
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        registry.addEndpoint(endpoint)
+        registry.addEndpoint(endpoint).setAllowedOrigins("*")
     }
 }

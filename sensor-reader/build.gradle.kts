@@ -22,6 +22,7 @@ dependencies {
     implementation(Libs.springWeb)
     implementation(Libs.springMqtt)
     implementation(Libs.springWebSocket)
+    implementation("com.hivemq:hivemq-mqtt-client:1.2.1")
 
     testImplementation(Libs.springTest) {
         exclude("org.junit.vintage", "junit-vintage-engine")
