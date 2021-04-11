@@ -15,7 +15,7 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations
 open class MqttConfiguration {
 
     companion object {
-        val log: Logger = LoggerFactory.getLogger(this.javaClass)
+        val log: Logger = LoggerFactory.getLogger(MqttConfiguration::class.java)
     }
 
     @Value("\${mqtt.url}")
