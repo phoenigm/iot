@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.messaging.simp.SimpMessageSendingOperations
+import java.util.*
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentLinkedDeque
 
 
 @Configuration
@@ -36,33 +39,11 @@ open class MqttConfiguration {
     @Value("\${websocket.endpoint}")
     private lateinit var endpoint: String
 
-/*
     @Bean
-    open fun mqttClientFactory(mqttConnectOptions: MqttConnectOptions): MqttPahoClientFactory {
-        val factory = DefaultMqttPahoClientFactory()
-        factory.connectionOptions = mqttConnectOptions
-        return factory
-    }
-*/
+    open fun cache(): Deque<String> = ConcurrentLinkedDeque<String>()
 
     @Bean
-    open fun mqttConnectOptions(): MqttConnectOptions {
-        val mqttConnectOptions = MqttConnectOptions()
-        mqttConnectOptions.userName = "phoenigm"
-        mqttConnectOptions.password = "Qwerty123".toCharArray()
-        mqttConnectOptions.serverURIs = arrayOf("tcp://d427e1f50e8041e4af18d3125fd0dc91.s1.eu.hivemq.cloud:8883")
-        return mqttConnectOptions
-    }
-
-/*    @Bean
-    open fun mqttClient(mqttConnectOptions: MqttConnectOptions): IMqttClient {
-        val mqttClient: IMqttClient = MqttClient(url, MqttAsyncClient.generateClientId())
-        mqttClient.connect(mqttConnectOptions)
-        return mqttClient
-    }*/
-
-    @Bean
-    open fun mqtt(socketTemplate: SimpMessageSendingOperations): MqttClient {
+    open fun mqtt(cache: Deque<String>): MqttClient {
         val client: Mqtt3AsyncClient = MqttClient.builder()
             .useMqttVersion3().identifier("2").sslWithDefaultConfig()
             .serverHost("d427e1f50e8041e4af18d3125fd0dc91.s1.eu.hivemq.cloud").serverPort(8883)
@@ -79,7 +60,8 @@ open class MqttConfiguration {
                 .topicFilter(topic)
                 .callback { message ->
                     val s = String(message.payloadAsBytes)
-                    socketTemplate.convertAndSend("topic", s)
+                    cache.clear()
+                    cache.add(s)
                     log.info(s)
                 }
                 .send()
@@ -93,19 +75,4 @@ open class MqttConfiguration {
         return client
     }
 
-/*    @Bean
-    open fun mqttInputChannel(): MessageChannel = DirectChannel()
-
-    @Bean
-    open fun mqttInbound(
-        mqttClientFactory: MqttPahoClientFactory,
-        mqttInputChannel: MessageChannel
-    ): MessageProducerSupport {
-        val adapter = MqttPahoMessageDrivenChannelAdapter(clientId, mqttClientFactory, topic)
-        adapter.setCompletionTimeout(5000)
-        adapter.setConverter(DefaultPahoMessageConverter())
-        adapter.setQos(2)
-        adapter.outputChannel = mqttInputChannel
-        return adapter
-    }*/
 }
