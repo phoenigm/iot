@@ -9,6 +9,6 @@ class CarboRest(
     private val cache: Deque<String>
 ) {
 
-    @GetMapping
+    @GetMapping("/carbon-dioxide")
     fun getData(): String = cache.last
 }
