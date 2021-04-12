@@ -79,7 +79,7 @@ open class MqttConfiguration {
                 .topicFilter(topic)
                 .callback { message ->
                     val s = String(message.payloadAsBytes)
-                    socketTemplate.convertAndSend(endpoint, s)
+                    socketTemplate.convertAndSend("topic", s)
                     log.info(s)
                 }
                 .send()
